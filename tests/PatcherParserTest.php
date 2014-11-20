@@ -43,7 +43,7 @@ class PatcherParserTest extends \TestDbAcle\PhpUnit\AbstractTestCase {
             ");
         $this->patcherParser->setPatcherPath(__DIR__ . '/patches')
                 ->executePatches();
-
+    
         $dateObj = new \DateTime();
         $curDate = $dateObj->format('Y-m-d');
         $this->assertTableStateContains("
@@ -95,14 +95,11 @@ class PatcherParserTest extends \TestDbAcle\PhpUnit\AbstractTestCase {
 
     public function test_executePatches_ExceptionPatch() {
 
-        $this->setExpectedException("Exception","PDO Exception:SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '`patch_table_0` (
+        $this->setExpectedException("Exception","PDO Exception: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '`patch_table_0` (
                 `patch_table_1_id` int(11) NOT NULL AUTO_INCRE' at line 1");
         
         $this->patcherParser->setPatcherPath(__DIR__ . '/patches')
                 ->executePatches();
 
     }
-    
-    
-
 }
