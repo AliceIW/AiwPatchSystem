@@ -14,5 +14,6 @@ abstract class AbstractPatcher {
         $this->pdo = $pdo;
     }
 
+    abstract function execute();
    
 }

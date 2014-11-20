@@ -1,5 +1,9 @@
 <?php
 
+/*
+ *  @author AliceIw
+ */
+
 namespace AiwPatchSystem;
 
 class PatcherParser {
@@ -7,7 +11,7 @@ class PatcherParser {
     protected $pdo;
     protected $patcherPath;
     protected $dbPatchesTable;
-    protected $loadedPatches = [];
+    protected $loadedPatches = array();
 
     function __construct(\PDO $pdo, $dbPatchesTable = 'db_patches') {
         $this->pdo = $pdo;

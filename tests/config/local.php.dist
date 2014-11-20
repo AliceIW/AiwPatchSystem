@@ -1,0 +1,10 @@
+<?php
+
+return [
+    'dsn'      => 'mysql:host = @DBHOST@;dbname=@DBNAME@',
+    'username' => '@DBUSER@',
+    'password' => '@DBPASS@',
+    'options'  => [
+        \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES UTF8'
+    ]
+];

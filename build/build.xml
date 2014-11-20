@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="DatabaseAnalyzer" default="build" basedir="../">
+<project name="AiwPatchSystem" default="build" basedir="../">
 
     <target name="getProps" description="Gets the base properties">
        <property file="${basedir}/build/developer.properties" />

@@ -1,0 +1,5 @@
+# database
+dbName=test_patcher
+dbHost=localhost
+dbUser=root
+dbPass=root
