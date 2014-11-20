@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="DatabaseAnalyzer" default="build" basedir="../">
+
+    <target name="getProps" description="Gets the base properties">
+       <property file="${basedir}/build/developer.properties" />
+
+       <echo message="---- Build Properties ----" />
+       <echo message="" />
+       <echo message="OS is ${os.name}" />
+       <echo message="Basedir is ${basedir}" />
+
+
+    </target>
+    <target name="composerget" description="Composer update dependencies">
+        <exec executable="/bin/bash">
+            <arg value="-c" />
+            <arg value="curl -s https://getcomposer.org/installer | php" />
+        </exec>
+    </target>
+    <target name="composerUpdate" depends="getProps" description="gets composer dependencies">
+       <exec dir="${basedir}/" executable="./composer.phar" failonerror="true" >
+            <arg value="update"/>
+       </exec>
+    </target>
+    
+    <target name="configure" depends="getProps" description="Write the config files">
+        <copy file="${basedir}/tests/config/local.php.dist" tofile="${basedir}/tests/config/local.php" overwrite="true" />
+
+        <replace file="${basedir}/tests/config/local.php" token="@DBNAME@" value="${dbName}" />
+        <replace file="${basedir}/tests/config/local.php" token="@DBHOST@" value="${dbHost}" />
+        <replace file="${basedir}/tests/config/local.php" token="@DBUSER@" value="${dbUser}" />
+        <replace file="${basedir}/tests/config/local.php" token="@DBPASS@" value="${dbPass}" />
+    </target>
+    
+    <target name="runDump" depends="configure" >
+        <exec executable="php"  dir="${basedir}/build/">
+            <arg value="./run_dump.php"/>
+        </exec>
+    </target>
+    
+     <target name="unitTest" depends="configure" description="Runs the unit tests">
+       <exec dir="${basedir}/tests/" executable="phpunit" failonerror="true" />
+    </target>
+    
+    <target name="build" depends="composerget,composerUpdate,configure,runDump,unitTest" description="The main build">
+        <echo message="Building..." />
+    </target>
+</project>

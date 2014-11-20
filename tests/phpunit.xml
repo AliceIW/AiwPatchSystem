@@ -1,0 +1,21 @@
+<phpunit bootstrap="../vendor/autoload.php" colors="true">
+    <testsuite name="AiwPatcherSystem Test Suite">
+        <directory>./</directory>
+    </testsuite>
+
+    <groups>
+        <exclude>
+            <group>disable</group>
+        </exclude>
+    </groups>
+
+    <filter>
+        <whitelist>
+            <directory suffix=".php">../lib/</directory>
+        </whitelist>
+    </filter>
+    <logging>
+        <log type="coverage-html" target="../build/coverage/"/>
+    </logging>
+    
+</phpunit>

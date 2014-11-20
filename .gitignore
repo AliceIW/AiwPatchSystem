@@ -1,0 +1,6 @@
+composer.phar
+build/coverage
+vendor/
+composer.lock
+build/developer.properties.dist
+tests/config/local.php.dist
