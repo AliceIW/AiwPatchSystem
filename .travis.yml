@@ -1,0 +1,16 @@
+language: php
+php:
+  - "5.5"
+  - "5.4"
+  - "5.3"
+
+
+before_script:
+  - composer self-update
+  - composer install --dev --prefer-source
+  - mysql -e 'create database test_patcher;'
+  - sed -e 's/@DBHOST@/'localhost'/' -e 's/@DBNAME@/'test_patcher'/' -e 's/@DBUSER@/'root'/' -e 's/@DBPASS@/''/' tests/config/local.php.dist > tests/config/local.php
+  - cd build
+  - cd ..
+ 
+script: "phpunit -c tests/phpunit.xml"
